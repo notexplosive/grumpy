@@ -1,10 +1,15 @@
+var visitedMap = {};
+
 function filterVideoElements() {
   for (video of videos) {
-    var oldTitle = video.titleText;
-    video.titleElement.innerText = createNewTitle(oldTitle);
+    if (visitedMap[video.titleElement] == undefined) {
+      visitedMap[video.titleElement] = true;
+      var oldTitle = video.titleText;
+      video.titleElement.innerText = createNewTitle(oldTitle);
 
-    if (oldTitle != video.titleElement.innerHTML) {
-      video.titleElement.style.color = "#E5862D";
+      if (oldTitle != video.titleElement.innerHTML) {
+        video.titleElement.style.color = "#E5862D";
+      }
     }
   }
 }
