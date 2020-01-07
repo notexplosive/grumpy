@@ -1,10 +1,17 @@
 {
-  "name": "Not So Grump",
+  "name": "Grumpy",
   "version": "1.0",
-  "description": "Not So Grump extension NotExplosive",
-  "permissions": ["storage", "https://www.youtube.com/*"],
+  "description": "Grumpy Clickbait Filter by NotExplosive",
+  "icons": {
+    "16": "grumpy.png",
+    "32": "grumpy.png",
+    "48": "grumpy.png",
+    "128": "grumpy.png"
+  },
+  "permissions": ["storage", "declarativeContent", "https://www.youtube.com/*"],
   "page_action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": "grumpy.png"
   },
   "options_page": "options.html",
   "background": {
