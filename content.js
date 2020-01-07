@@ -2,8 +2,8 @@ var visitedMap = {};
 
 function filterVideoElements() {
   for (video of videos) {
-    if (visitedMap[video.titleElement] == undefined) {
-      visitedMap[video.titleElement] = true;
+    if (visitedMap[video.titleText] == undefined) {
+      visitedMap[video.titleText] = true;
       var oldTitle = video.titleText;
       video.titleElement.innerText = createNewTitle(oldTitle);
 
@@ -29,7 +29,8 @@ function createNewTitle(oldTitle) {
     endPartOfTitle == "Guest Grumps" ||
     endPartOfTitle == "Ten Minute Power Hour" ||
     endPartOfTitle == "Steam Train" ||
-    endPartOfTitle == "Game Grumps VS"
+    endPartOfTitle == "Game Grumps VS" ||
+    endPartOfTitle == "Compilation"
   ) {
     return oldTitle;
   }
@@ -88,14 +89,19 @@ function getVideoElementsForWatch() {
 
     if (titleElementRoot) {
       var titleElement = titleElementRoot.querySelectorAll("span")[0];
-      var video = {
-        titleElement: titleElement,
-        authorElement: element.querySelectorAll("ytd-channel-name")[0],
-        titleText: titleElement.innerText
-      };
+      if (titleElement) {
+        var video = {
+          titleElement: titleElement,
+          authorElement: element.querySelectorAll("ytd-channel-name")[0],
+          titleText: titleElement.getAttribute("title")
+        };
 
-      if (video.authorElement.innerText === "GameGrumps") {
-        videos.push(video);
+        if (
+          video.authorElement &&
+          video.authorElement.innerText === "GameGrumps"
+        ) {
+          videos.push(video);
+        }
       }
     } else {
       // playlist probably
@@ -118,7 +124,7 @@ function getTitleElement(linksElements) {
 
 function getAuthorElement(linksElements) {
   for (element of linksElements) {
-    // Author does not have an id
+    // Author does not have an id, sloppy what whatever it works
     if (element.getAttribute("id") == null) {
       return element;
     }
@@ -142,4 +148,4 @@ if (document.URL.match(/https:\/\/www\.youtube\.com\/watch.*/gm)) {
   };
 }
 
-setInterval(exec, 500);
+setInterval(exec, 1000);
