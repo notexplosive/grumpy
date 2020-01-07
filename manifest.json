@@ -2,12 +2,7 @@
   "name": "Not So Grump",
   "version": "1.0",
   "description": "Not So Grump extension NotExplosive",
-  "permissions": [
-    "declarativeContent",
-    "storage",
-    "activeTab",
-    "https://www.youtube.com/*"
-  ],
+  "permissions": ["storage", "https://www.youtube.com/*"],
   "page_action": {
     "default_popup": "popup.html"
   },
