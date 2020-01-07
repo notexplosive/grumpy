@@ -148,4 +148,34 @@ if (document.URL.match(/https:\/\/www\.youtube\.com\/watch.*/gm)) {
   };
 }
 
-setInterval(exec, 1000);
+var interval;
+
+function haltRunning() {
+  if (interval !== undefined) {
+    clearInterval(interval);
+  }
+}
+
+function beginRunning() {
+  haltRunning();
+  interval = setInterval(exec, 1000);
+}
+
+chrome.storage.sync.get(["enabled"], function(result) {
+  if (result.enabled) {
+    beginRunning();
+  }
+});
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+  for (var key in changes) {
+    if (key == "enabled") {
+      let isEnabled = changes[key].newValue;
+      if (isEnabled) {
+        beginRunning();
+      } else {
+        haltRunning();
+      }
+    }
+  }
+});

@@ -1,9 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head> </head>
+  <head>
+    <style>
+      html {
+        height: 70px;
+        width: 100px;
+      }
+
+      body {
+        height: 70px;
+        width: 100px;
+      }
+
+      button {
+        height: 40px;
+        width: 80%;
+        padding: 0px;
+        margin: 0px;
+      }
+    </style>
+  </head>
   <body>
-    <h3 id="status">Grumpy</h3>
-    <button id="toggle">Toggle</button>
+    <h3 id="status-text">Grumpy</h3>
+    <button id="toggle-button" onclick="onToggleButtonPressed()">Toggle</button>
     <script src="popup.js"></script>
   </body>
 </html>
